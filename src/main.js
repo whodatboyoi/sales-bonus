@@ -7,9 +7,9 @@
  */
 function calculateSimpleRevenue(purchase, _product) {
    // @TODO: Расчет выручки от операции
-   const discount =  1 - (_product.discount ?? 0) / 100;
-   const salePrice = _product.sale_price ?? 0;
-   const quantity = _product.quantity ?? 0;
+   const discount =  1 - (purchase.discount ?? 0) / 100;
+   const salePrice = purchase.sale_price ?? 0;
+   const quantity = purchase.quantity ?? 0;
    return salePrice * quantity * discount;
 }
 
@@ -108,7 +108,7 @@ function analyzeSalesData(data, options) {
             const quantity = item.quantity ?? 0;
             const purchasePrice = product.purchase_price ?? 0;
             const cost = purchasePrice * quantity;
-            const revenue = calculateRevenue(record, item) ?? 0;
+            const revenue = calculateRevenue(item, product) ?? 0;
             const profit = revenue - cost;
             seller.profit += profit;
     
